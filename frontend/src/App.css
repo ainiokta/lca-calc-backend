@@ -1,0 +1,63 @@
+/* Reset App container */
+.App {
+  font-family: Arial, sans-serif;
+  background-color: #e3edf7; /* light gray background */
+  min-height: 100vh;
+}
+
+.container-fluid{
+  min-height: 100vh;
+  padding: 15px;
+  background-color: #d5ffb0;
+}
+.card {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+hr {
+  /* border: none; */
+  border: 1.5px solid #004000;
+  margin: 15px auto; /* space above & below, centered */
+}
+
+.inside-main{
+  margin: 0px auto;
+  padding: 20px; /* removes default inner spacing */
+  max-width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+}
+
+.inside-summary{
+  margin: 0px auto;
+  margin-top: 15px;
+  padding: 20px; /* removes default inner spacing */
+  max-width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+}
+
+.title {
+  border: none !important;
+  box-shadow: none !important;
+  
+}
+
+.title .card-body{
+  padding: 0px 5px;
+}
+
+.title h1 {
+  font-weight: bolder;
+  margin: 0px;
+  color: #2f672f;
+}
+
+.calc-card {
+  padding: 10px;
+}

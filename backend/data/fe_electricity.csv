@@ -1,0 +1,170 @@
+Id,Grid,Provinsi,Faktor_Emisi_(FE)
+1,3 Nusa,Bali,0.52
+2,Adonara,Nusa Tenggara Timur,0.59
+3,Alai (Kepri),Kepulauan Riau,0.53
+4,Alor,Nusa Tenggara Timur,0.58
+5,Ambon,Maluku,0.66
+6,Ampana,Sulawesi Tengah,0.61
+7,Balantak,Sulawesi Tengah,0.67
+8,Bangka,Bangka Belitung,0.89
+9,Bantal,Bengkulu,0.64
+10,Barito,Kalimantan Tengah,1.31
+11,Batam-Tanjung Pinang,Kepulauan Riau,0.82
+12,Bau-Bau,Sulawesi Tenggara,0.74
+13,Belitung,Bangka Belitung,1.41
+14,Bengkalis (Riau),Riau,0.01
+15,Bere-Bere (Morotai),Maluku Utara,0.69
+16,Biak,Papua,0.57
+17,Biaro,Sulawesi Utara,0.6
+18,Bicoli (Halmahera Timur),Maluku Utara,0.66
+19,Bima,Nusa Tenggara Barat,0.55
+20,Bualemo,Sulawesi Tengah,0.71
+21,Buano (Seram Barat),Maluku,0.71
+22,Bukide,Sulawesi Utara,1.77
+23,Bula (Seram Timur),Maluku,0.55
+24,Buli (Halmahera Timur),Maluku Utara,0.65
+25,Bulungkobit,Sulawesi Tengah,0.91
+26,Bunta,Sulawesi Tengah,0.6
+27,Concong Luar (Riau),Riau,0.67
+28,Dabo Singkep (Kepri),Kepulauan Riau,0.48
+29,Daruba (Morotai),Maluku Utara,0.6
+30,Dobo,Maluku,0.54
+31,Durai (Kepri),Kepulauan Riau,0.55
+32,Ende,Nusa Tenggara Timur,1.03
+33,Geser (Seram Timur),Maluku,0.62
+34,Haruku (Maluku Tengah),Maluku,0.66
+35,Ibu (Halmahera Barat),Maluku Utara,0.6
+36,Ipuh,Bengkulu,0.64
+37,Jailolo (Halmahera Barat),Maluku Utara,0.57
+38,Jamali,Banten,0.87
+39,Jamali,Banten,0.87
+40,Jamali,Dki Jakarta,0.87
+41,Jamali,Jawa Barat,0.87
+42,Jamali,Jawa Tengah,0.87
+43,Jamali,Di Yogyakarta,0.87
+44,Jamali,Jawa Timur,0.87
+45,Jayapura,Papua,0.51
+46,Kairatu (Seram bagian Barat,Maluku,0.6
+47,Karakelang (Talaud),Sulawesi Utara,0.53
+48,Karatung,Sulawesi Utara,0.64
+49,Karimun Jawa,Jawa Tengah,0.62
+50,Kedi (Halmahera Barat),Maluku Utara,0.69
+51,Kelong,Kepulauan Riau,0.5
+52,Kendari,Sulawesi Tenggara,1.02
+53,Kesui (Seram Timur),Maluku,0.76
+54,Khatulistiwa,Kalimantan Barat,1.63
+55,Kian Darat (Seram Timur),Maluku,0.61
+56,Kisar,Maluku,0.57
+57,Kobisonta (Seram Utara),Maluku,0.59
+58,Kolaka,Sulawesi Tenggara,0.46
+59,Kota Bani,Bengkulu,0.7
+60,Kota Lama (Riau),Riau,0.59
+61,Kotaraya,Sulawesi Tengah,0.49
+62,Ladan,Kepulauan Riau,0.54
+63,Laimu (Seram Selatan),Maluku,0.67
+64,Lambuya,Sulawesi Tenggara,0.56
+65,Larat,Maluku,0.54
+66,Lelang,Sulawesi Tengah,0.6
+67,Lemang (Riau),Riau,0.56
+68,Lembata,Nusa Tenggara Timur,0.22
+69,Letung,Kepulauan Riau,0.63
+70,Lipulalongo,Sulawesi Tengah,0.71
+71,Liran,Maluku,1.22
+72,Lirung,Sulawesi Utara,0.57
+73,Lolobata (Halmahera TImur),Maluku Utara,0.7
+74,Lombok,Nusa Tenggara Barat,1.61
+75,Luhu (Seram bagian Barat),Maluku,0.61
+76,Lumbi-lumbia,Sulawesi Tengah,0.78
+77,Luwuk,Sulawesi Tengah,0.6
+78,Maba (Halmahera Timur),Maluku Utara,0.61
+79,Mahakam,Kalimantan Timur,1.14
+80,Makalehi,Sulawesi Utara,0.72
+81,Mako (Buru),Maluku,0.58
+82,Malifut (Halmahera Utara),Maluku Utara,0.63
+83,Mangaran,Sulawesi Utara,0.62
+84,Manggarai,Nusa Tenggara Timur,0.28
+85,Manokwari,Papua Barat,0.56
+86,Marampit,Sulawesi Utara,0.79
+87,Marore,Sulawesi Utara,0.63
+88,Masohi (Maluku Tengah),Maluku,0.57
+89,Maumere,Nusa Tenggara Timur,0.56
+90,Merauke,Papua,0.55
+91,Miangas,Sulawesi Utara,0.66
+92,Midai,Kepulauan Riau,0.55
+93,Moa,Maluku,0.51
+94,Moro (Kepri),Kepulauan Riau,0.5
+95,Mukomuko,Bengkulu,0.66
+96,Nabire,Papua,0.52
+97,Namlea,Maluku,0.6
+98,Namrole (Buru Selatan),Maluku,0.77
+99,Nanedakele,Sulawesi Utara,0.86
+100,Nias,Sumatera Utara,0.75
+101,Ondor (Seram Utara),Maluku,0.6
+102,Pagai Selatan,Sumatera Barat,0.66
+103,Palapas-Palu,Sulawesi Tengah,0.54
+104,Paposta,Sulawesi Tengah,0.02
+105,Pasanea (Seram Utara Barat),Maluku,0.63
+106,Penuba (Kepri),Kepulauan Riau,0.58
+107,Piru (Seram Barat),Maluku,0.61
+108,Pulau Buru,Maluku,0.56
+109,Pulau Elat,Maluku,0.68
+110,Pulau Halang (Riau),Riau,0.6
+111,Pulau Tello,Sulawesi Selatan,0.91
+112,Raha,Sulawesi Tenggara,0.57
+113,Ranai,Kepulauan Riau,0.57
+114,Rote,Nusa Tenggara Timur,0.59
+115,S Nasik Belitung,Bangka Belitung,0.43
+116,Salakan,Sulawesi Tengah,0.58
+117,Saumlaki,Maluku,0.51
+118,Sedanau,Kepulauan Riau,0.58
+119,Selat Panjang (Riau),Riau,0.51
+120,Seliu Belitung,Bangka Belitung,0.49
+121,Serasan,Kepulauan Riau,0.64
+122,Serui,Papua,0.59
+123,Serwaru,Maluku,0.54
+124,Siau,Sulawesi Utara,0.53
+125,Siberut,Sumatera Barat,0.7
+126,Siberut Utara,Sumatera Barat,0.71
+127,Sipora,Sumatera Barat,0.67
+128,Sorong,Papua Barat,0.56
+129,Sulselbar,Sulawesi Selatan,0.95
+130,Sulselbar,Sulawesi Barat,0.95
+131,Sulutgo,Sulawesi Utara,0.78
+132,Sulutgo,Gorontalo,0.78
+133,Sumatera,Aceh,0.94
+134,Sumatera,Bengkulu,0.94
+135,Sumatera,Jambi,0.94
+136,Sumatera,Lampung,0.94
+137,Sumatera,Riau,0.94
+138,Sumatera,Sumatera Barat,0.94
+139,Sumatera,Sumatera Selatan,0.94
+140,Sumatera,Sumatera Utara,0.94
+141,Sumbawa,Nusa Tenggara Barat,0.7
+142,Sungai Guntung (Riau),Riau,0.58
+143,Tagulandang,Sulawesi Utara,0.55
+144,Tahuna (Sangihe),Sulawesi Utara,0.58
+145,Tambelan (Kepri),Kepulauan Riau,0.65
+146,Taniwel (Seram Barat),Maluku,0.58
+147,Tanjung Balai Karimun,Kepulauan Riau,0.84
+148,Tanjung Batu,Kepulauan Riau,0.5
+149,Tanjung Samak (Riau),Riau,0.56
+150,Tarakan,Kalimantan Utara,0.48
+151,Tarempa,Kepulauan Riau,0.43
+152,Tehoru (Seram Selatan),Maluku,0.64
+153,Teluk Dalam (Riau),Riau,0.69
+154,Teluk Ketapang (Riau),Riau,0.76
+155,Tembilahan (Riau),Riau,0.66
+156,Ternate - Tidore,Maluku Utara,0.48
+157,Timika,Papua,0.57
+158,Timor,Nusa Tenggara Timur,0.69
+159,Tobelo,Maluku Utara,0.59
+160,Toili,Sulawesi Tengah,0.6
+161,Toli-Toli,Sulawesi Tengah,0.5
+162,Tual,Maluku,0.58
+163,Wahai (Seram Utara),Maluku,0.63
+164,Waingapu,Nusa Tenggara Timur,0.55
+165,Wakai,Sulawesi Tengah,0.72
+166,Wangi-Wangi,Sulawesi Tenggara,0.51
+167,Weda (Halmahera Tengah),Maluku Utara,0.63
+168,Werinama (Seram Timur),Maluku,0.67
+169,Wetar,Maluku,1.12

@@ -1,0 +1,9 @@
+Id,Bahan_Bakar_Minyak,Faktor_Emisi_(FE),Lower,Upper
+1,Bensin RON 98 (Pertamax Turbo),2.28301,2.14835478,2.42092928
+2,Bensin RON 92 (Pertamax),2.28681,2.12190264,2.4587563
+3,Bensin RON 90 (Pertalite),2.2951,2.125565585,2.47195795
+4,Bensin RON 88 (Premium),2.30767,2.143723725,2.47994439
+5,Avtur,2.55985,2.42595925,2.69931648
+6,Minyak Solar CN 53 (Dex),2.665,2.56585216,2.76968332
+7,Minyak Solar CN 51 (Dexlite),2.68433,2.54200293,2.8314176
+8,Minyak Solar CN 48 (Solar),2.687275,2.5384968,2.8413704
