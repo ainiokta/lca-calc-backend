@@ -1,63 +1,173 @@
-/* Reset App container */
-.App {
-  font-family: Arial, sans-serif;
-  background-color: #e3edf7; /* light gray background */
+/* Background setup */
+.calculator-bg {
+  background: radial-gradient(circle at top left, #e8f5e9, #ffffff);
   min-height: 100vh;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
 }
 
-.container-fluid{
-  min-height: 100vh;
-  padding: 15px;
-  background-color: #d5ffb0;
+/* Main glass container */
+.calculator-wrapper {
+  background: white;
+  padding: 3rem;
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(45, 106, 79, 0.08);
+  max-width: 800px;
+  margin: 0 auto;
 }
-.card {
+
+.main-title {
+  color: #1b4332;
+  font-weight: 800;
+  font-size: 2.2rem;
+}
+
+/* Category Card Styling */
+.category-card {
   border: none !important;
-  box-shadow: none !important;
-  margin: 0px;
-  padding: 0px;
-  border-radius: 0;
-  background-color: rgba(255, 255, 255, 0);
+  border-radius: 20px !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: #fcfdfc;
 }
 
-hr {
-  /* border: none; */
-  border: 1.5px solid #004000;
-  margin: 15px auto; /* space above & below, centered */
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
 }
 
-.inside-main{
-  margin: 0px auto;
-  padding: 20px; /* removes default inner spacing */
-  max-width: 100%;
-  background-color: rgb(255, 255, 255);
-  border-radius: 15px;
+.category-card.is-open {
+  background: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
-.inside-summary{
-  margin: 0px auto;
-  margin-top: 15px;
-  padding: 20px; /* removes default inner spacing */
-  max-width: 100%;
-  background-color: rgb(255, 255, 255);
-  border-radius: 15px;
+/* Icon backgrounds */
+.icon-wrapper {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 1.5rem;
 }
 
-.title {
-  border: none !important;
-  box-shadow: none !important;
-  
+.icon-electricity { background: #e8f5e9; color: #2d6a4f; }
+.icon-fuel { background: #fff3e0; color: #ef6c00; }
+.icon-gas { background: #e3f2fd; color: #1565c0; }
+
+.category-title {
+  font-weight: 700;
+  color: #2d3436;
+  font-size: 1.3rem;
 }
 
-.title .card-body{
-  padding: 0px 5px;
+.emission-value {
+  font-weight: 700;
+  color: #2d6a4f;
+  font-size: 1.4rem;
 }
 
-.title h1 {
-  font-weight: bolder;
-  margin: 0px;
-  color: #2f672f;
+.emission-value small {
+  font-size: 0.9rem;
+  color: #95a5a6;
+  font-weight: 400;
 }
 
-.calc-card {
-  padding: 10px;
+/* Form transition area */
+.form-container {
+  background: #f8faf9;
+  padding: 20px 30px 20px 85px;
+  border-top: 1px solid #edf2f0;
+}
+
+/* Button Styling */
+.btn-calculate {
+  background: linear-gradient(135deg, #40916c, #2d6a4f);
+  border: none;
+  padding: 12px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 20px rgba(45, 106, 79, 0.3);
+}
+
+/* Animations */
+.chevron-icon {
+  transition: transform 0.3s ease;
+  color: #cbd5e0;
+}
+.chevron-icon.rotate {
+  transform: rotate(90deg);
+}
+
+/* Custom Input Styling */
+.custom-input {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  font-size: 0.9rem !important;
+}
+
+.custom-input:focus {
+  border-color: #40916c !important;
+  box-shadow: 0 0 0 0.2rem rgba(64, 145, 108, 0.1) !important;
+}
+
+/* Rounded Buttons */
+.btn-circle {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add-row {
+  border-radius: 10px;
+  border-style: dashed; /* Makes it look like an "optional" addition */
+  font-weight: 600;
+  padding: 8px 20px;
+}
+
+/* Remove bottom border on last row */
+.fuel-entry-row:last-of-type {
+  border-bottom: none !important;
+}
+
+/* Custom Input Styling */
+.custom-input {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  font-size: 0.9rem !important;
+}
+
+.custom-input:focus {
+  border-color: #40916c !important;
+  box-shadow: 0 0 0 0.2rem rgba(64, 145, 108, 0.1) !important;
+}
+
+/* Rounded Buttons */
+.btn-circle {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add-row {
+  border-radius: 10px;
+  border-style: dashed; /* Makes it look like an "optional" addition */
+  font-weight: 600;
+  padding: 8px 20px;
+}
+
+/* Remove bottom border on last row */
+.fuel-entry-row:last-of-type {
+  border-bottom: none !important;
 }

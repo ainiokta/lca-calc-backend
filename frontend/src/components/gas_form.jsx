@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import API from "../api";
-import { Card, Form, FloatingLabel, Button } from "react-bootstrap";
+import { Form, FloatingLabel, Button, Row, Col } from "react-bootstrap";
 
 export default function GasForm({ data = [], setData }) {
   const [entries, setEntries] = useState(
     Array.isArray(data) && data.length
       ? data
-      : [{ keterangan: "", jenis_gas: "", fe: "", jumlah: "", emission: null, gases:[] }]
+      : [{ keterangan: "", jenis_gas: "", fe: "", jumlah: "", emission: "" }]
   );
   const [gases, setGases] = useState([]);
 
   // Sync parent state
   useEffect(() => {
     setData(entries);
-  }, [entries]);
+  }, [entries, setData]);
 
-  // Load jenis bahan bakar once
+  // Load gas types
   useEffect(() => {
     API.get("/list-gas").then((res) => setGases(res.data));
   }, []);
@@ -23,7 +23,7 @@ export default function GasForm({ data = [], setData }) {
   const addRow = () => {
     setEntries([
       ...entries,
-      { keterangan: "", jenis_gas: "", fe: "", jumlah: "", emission: null, gases: [] },
+      { keterangan: "", jenis_gas: "", fe: "", jumlah: "", emission: "" },
     ]);
   };
 
@@ -43,125 +43,115 @@ export default function GasForm({ data = [], setData }) {
       }).then((res) => {
         newEntries[index].emission = res.data.emission_kgCO2 || 0;
         newEntries[index].fe = res.data.FE || "";
-        setEntries(newEntries);
+        setEntries([...newEntries]);
       });
     } else {
-      if (!fe) newEntries[index].fe = "";
       newEntries[index].emission = (jumlah && fe) ? (jumlah * fe).toFixed(2) : "";
-      setEntries(newEntries);
+      setEntries([...newEntries]);
     }
   };
 
   return (
-    <div>
+    <div className="px-3 pb-3">
       {entries.map((entry, index) => (
-        <Card className="mb-3" key={index}>
-          <Card.Body>
-            <div className="row g-2 align-items-center">
-              {/* Keterangan */}
-              <div className="col">
-                <FloatingLabel
-                  controlId={`keterangan-${index}`}
-                  label="Keterangan"
-                >
-                  <Form.Control
-                    type="text"
-                    placeholder="Keterangan"
-                    value={entry.keterangan}
-                    onChange={(e) =>
-                      handleChange(index, "keterangan", e.target.value)
-                    }
-                  />
-                </FloatingLabel>
-              </div>
+        <div className="gas-entry-row mb-3 pb-3 border-bottom" key={index}>
+          <Row className="g-2 align-items-center">
+            {/* Keterangan */}
+            <Col md={3}>
+              <FloatingLabel label="Keterangan">
+                <Form.Control
+                  type="text"
+                  placeholder="Keterangan"
+                  className="custom-input"
+                  value={entry.keterangan}
+                  onChange={(e) => handleChange(index, "keterangan", e.target.value)}
+                />
+              </FloatingLabel>
+            </Col>
 
-              {/* Jenis Bahan Bakar */}
-              <div className="col">
-                <FloatingLabel
-                  controlId={`jenisgas-${index}`}
-                  label="Jenis Gas"
-                >
-                  <Form.Select
-                    value={entry.jenis_gas}
-                    onChange={(e) => {
-                    const selectedGas = gases.find(
-                        (f) => f.Bahan_Bakar_Gas === e.target.value
-                    );
+            {/* Jenis Gas */}
+            <Col md={3}>
+              <FloatingLabel label="Jenis Gas">
+                <Form.Select
+                  className="custom-input"
+                  value={entry.jenis_gas}
+                  onChange={(e) => {
+                    const selectedGas = gases.find(g => g.Bahan_Bakar_Gas === e.target.value);
                     handleChange(index, "jenis_gas", e.target.value);
                     handleChange(index, "fe", selectedGas ? selectedGas["Faktor_Emisi_(FE)"] : "");
-                    }}
-                    placeholder=""
-                  >
-                    <option value="" disabled hidden>
-                      Pilih Jenis Gas
-                    </option>
-                    {gases.map((f) => (
-                        <option key={f.Bahan_Bakar_Gas} value={f.Bahan_Bakar_Gas}>
-                            {f.Bahan_Bakar_Gas}
-                        </option>
-                    ))}
-                  </Form.Select>
-                </FloatingLabel>
-              </div>
-
-              {/* FE */}
-              <div className="col">
-                <FloatingLabel controlId={`fe-${index}`} label="Faktor Emisi">
-                  <Form.Control
-                    type="text"
-                    value={entry.fe}
-                    placeholder=""
-                    readOnly
-                    disabled
-                  />
-                </FloatingLabel>
-              </div>
-
-              {/* Jumlah (liter) */}
-              <div className="col">
-                <FloatingLabel controlId={`jumlah-${index}`} label="Jumlah Pemakaian (Kg)">
-                  <Form.Control
-                    type="number"
-                    placeholder=" "
-                    min={0}
-                    value={entry.jumlah}
-                    onChange={(e) =>
-                      handleChange(index, "jumlah", Number(e.target.value))
-                    }
-                  />
-                </FloatingLabel>
-              </div>
-
-              {/* Total Emission */}
-              <div className="col">
-                <FloatingLabel
-                  controlId={`emission-${index}`}
-                  label="Total Emisi (kgCO₂)"
+                  }}
                 >
-                  <Form.Control
-                    type="text"
-                    placeholder=" "
-                    value={entry.emission || ""}
-                    readOnly
-                    disabled
-                  />
-                </FloatingLabel>
-              </div>
+                  <option value="" disabled hidden>Pilih Jenis Gas</option>
+                  {gases.map((g) => (
+                    <option key={g.Bahan_Bakar_Gas} value={g.Bahan_Bakar_Gas}>
+                      {g.Bahan_Bakar_Gas}
+                    </option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>
+            </Col>
 
-              {/* Remove button */}
-              <div className="col-auto">
-                <Button variant="danger" onClick={() => removeRow(index)}>
-                  x
+            {/* Faktor Emisi (FE) */}
+            <Col md={2}>
+              <FloatingLabel label="Faktor">
+                <Form.Control
+                  type="text"
+                  value={entry.fe}
+                  readOnly
+                  disabled
+                  className="bg-light custom-input text-muted"
+                />
+              </FloatingLabel>
+            </Col>
+
+            {/* Jumlah (Kg) */}
+            <Col md={2}>
+              <FloatingLabel label="Jumlah (Kg)">
+                <Form.Control
+                  type="number"
+                  min={0}
+                  placeholder=" "
+                  className="custom-input"
+                  value={entry.jumlah}
+                  onChange={(e) => handleChange(index, "jumlah", Number(e.target.value))}
+                />
+              </FloatingLabel>
+            </Col>
+
+            {/* Total Emission Result */}
+            <Col md={index === 0 ? 2 : 1}>
+              <FloatingLabel label="kgCO₂">
+                <Form.Control
+                  type="text"
+                  value={entry.emission || ""}
+                  readOnly
+                  disabled
+                  className="bg-light fw-bold custom-input text-primary"
+                />
+              </FloatingLabel>
+            </Col>
+
+            {/* Delete Button (Hidden for the first row) */}
+            {index > 0 && (
+              <Col md={1} className="text-center">
+                <Button 
+                  variant="outline-danger" 
+                  className="btn-circle"
+                  onClick={() => removeRow(index)}
+                >
+                  <i className="bi bi-trash"></i>
                 </Button>
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
+              </Col>
+            )}
+          </Row>
+        </div>
       ))}
 
-      <Button variant="primary" onClick={addRow}>
-        Add
-      </Button>
+      <div className="mt-3">
+        <Button variant="outline-primary" className="btn-add-row" onClick={addRow}>
+          <i className="bi bi-plus-lg me-2"></i> Add Gas Entry
+        </Button>
+      </div>
     </div>
   );
 }

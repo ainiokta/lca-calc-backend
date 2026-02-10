@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import API from "../api";
-import { Card, Form, FloatingLabel, Button } from "react-bootstrap";
+import { Form, FloatingLabel, Button, Row, Col } from "react-bootstrap";
 
 export default function FuelForm({ data = [], setData }) {
   const [entries, setEntries] = useState(
     Array.isArray(data) && data.length
       ? data
-      : [{ keterangan: "", bahan_bakar: "", fe: "", jumlah: "", emission: null, fuels:[] }]
+      : [{ keterangan: "", bahan_bakar: "", fe: "", jumlah: "", emission: "" }]
   );
   const [fuels, setFuels] = useState([]);
 
-  // Sync parent state
   useEffect(() => {
     setData(entries);
-  }, [entries]);
+  }, [entries, setData]);
 
-  // Load jenis bahan bakar once
   useEffect(() => {
     API.get("/list-fuel").then((res) => setFuels(res.data));
   }, []);
@@ -23,7 +21,7 @@ export default function FuelForm({ data = [], setData }) {
   const addRow = () => {
     setEntries([
       ...entries,
-      { keterangan: "", bahan_bakar: "", fe: "", jumlah: "", emission: null, fuels: [] },
+      { keterangan: "", bahan_bakar: "", fe: "", jumlah: "", emission: "" },
     ]);
   };
 
@@ -43,121 +41,114 @@ export default function FuelForm({ data = [], setData }) {
       }).then((res) => {
         newEntries[index].emission = res.data.emission_kgCO2 || 0;
         newEntries[index].fe = res.data.FE || "";
-        setEntries(newEntries);
+        setEntries([...newEntries]);
       });
     } else {
-      if (!fe) newEntries[index].fe = "";
       newEntries[index].emission = (jumlah && fe) ? (jumlah * fe).toFixed(2) : "";
-      setEntries(newEntries);
+      setEntries([...newEntries]);
     }
   };
 
   return (
-    <div>
+    <div className="px-3 pb-3">
       {entries.map((entry, index) => (
-        <Card className="mb-3" key={index}>
-          <Card.Body style={{margin:"0px", marginLeft: "5px",padding: "0px", alignContent: "center"}}>
-            <div className="row align-items-center" style={{margin:"0px",padding: "0px"}}>
-              {/* Keterangan */}
-              <div className="col justify-content-between"style={{margin:"0px"}}>
-                <FloatingLabel controlId={`keterangan-${index}`} label="Keterangan">
-                  <Form.Control
-                    type="text"
-                    placeholder="Keterangan"
-                    value={entry.keterangan}
-                    onChange={(e) =>
-                      handleChange(index, "keterangan", e.target.value)
-                    }
-                  />
-                </FloatingLabel>
-              </div>
+        <div className="fuel-entry-row mb-3 pb-3 border-bottom" key={index}>
+          <Row className="g-2 align-items-center">
+            {/* Keterangan */}
+            <Col md={3}>
+              <FloatingLabel label="Keterangan">
+                <Form.Control
+                  type="text"
+                  placeholder="Keterangan"
+                  className="custom-input"
+                  value={entry.keterangan}
+                  onChange={(e) => handleChange(index, "keterangan", e.target.value)}
+                />
+              </FloatingLabel>
+            </Col>
 
-              {/* Jenis Bahan Bakar */}
-              <div className="col justify-content-between"style={{margin:"0px"}}>
-                <FloatingLabel
-                  controlId={`bahanbakar-${index}`}
-                  label="Jenis Bahan Bakar"
-                >
-                  <Form.Select
-                    value={entry.bahan_bakar}
-                    onChange={(e) => {
-                    const selectedFuel = fuels.find(
-                        (f) => f.Bahan_Bakar_Minyak === e.target.value
-                    );
+            {/* Jenis Bahan Bakar */}
+            <Col md={3}>
+              <FloatingLabel label="Jenis Bahan Bakar">
+                <Form.Select
+                  className="custom-input"
+                  value={entry.bahan_bakar}
+                  onChange={(e) => {
+                    const selectedFuel = fuels.find(f => f.Bahan_Bakar_Minyak === e.target.value);
                     handleChange(index, "bahan_bakar", e.target.value);
                     handleChange(index, "fe", selectedFuel ? selectedFuel["Faktor_Emisi_(FE)"] : "");
-                    }}
-                  >
-                    <option value="" disabled hidden>
-                      Pilih Bahan Bakar
-                    </option>
-                    {fuels.map((f) => (
-                        <option key={f.Bahan_Bakar_Minyak} value={f.Bahan_Bakar_Minyak}>
-                            {f.Bahan_Bakar_Minyak}
-                        </option>
-                    ))}
-                  </Form.Select>
-                </FloatingLabel>
-              </div>
-
-              {/* FE */}
-              <div className="col justify-content-between"style={{margin:"0px"}}>
-                <FloatingLabel controlId={`fe-${index}`} label="Faktor Emisi">
-                  <Form.Control
-                    type="text"
-                    value={entry.fe}
-                    placeholder=""
-                    readOnly
-                    disabled
-                  />
-                </FloatingLabel>
-              </div>
-
-              {/* Jumlah (liter) */}
-              <div className="col justify-content-between"style={{margin:"0px"}}>
-                <FloatingLabel controlId={`jumlah-${index}`} label="Jumlah Pemakaian (Liter)">
-                  <Form.Control
-                    type="number"
-                    placeholder=" "
-                    min={0}
-                    value={entry.jumlah}
-                    onChange={(e) =>
-                      handleChange(index, "jumlah", Number(e.target.value))
-                    }
-                  />
-                </FloatingLabel>
-              </div>
-
-              {/* Total Emission */}
-              <div className="col justify-content-between"style={{margin:"0px"}}>
-                <FloatingLabel
-                  controlId={`emission-${index}`}
-                  label="Total Emisi (kgCO₂)"
+                  }}
                 >
-                  <Form.Control
-                    type="text"
-                    placeholder=" "
-                    value={entry.emission || ""}
-                    readOnly
-                    disabled
-                  />
-                </FloatingLabel>
-              </div>
+                  <option value="" disabled hidden>Pilih...</option>
+                  {fuels.map((f) => (
+                    <option key={f.Bahan_Bakar_Minyak} value={f.Bahan_Bakar_Minyak}>
+                      {f.Bahan_Bakar_Minyak}
+                    </option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>
+            </Col>
 
-              {/* Remove button */}
-              <div className="col-auto">
-                <Button variant="danger" onClick={() => removeRow(index)}>
-                  x
+            {/* FE (Small column) */}
+            <Col md={2}>
+              <FloatingLabel label="Faktor">
+                <Form.Control
+                  type="text"
+                  value={entry.fe}
+                  readOnly
+                  disabled
+                  className="bg-light custom-input"
+                />
+              </FloatingLabel>
+            </Col>
+
+            {/* Jumlah */}
+            <Col md={2}>
+              <FloatingLabel label="Liter">
+                <Form.Control
+                  type="number"
+                  min={0}
+                  className="custom-input"
+                  value={entry.jumlah}
+                  onChange={(e) => handleChange(index, "jumlah", Number(e.target.value))}
+                />
+              </FloatingLabel>
+            </Col>
+
+            {/* Total Emission */}
+            <Col md={index === 0 ? 2 : 1}>
+              <FloatingLabel label="kgCO₂">
+                <Form.Control
+                  type="text"
+                  value={entry.emission || ""}
+                  readOnly
+                  disabled
+                  className="bg-light fw-bold custom-input text-success"
+                />
+              </FloatingLabel>
+            </Col>
+
+            {/* Remove button (Only if not first row) */}
+            {index > 0 && (
+              <Col md={1} className="text-center">
+                <Button 
+                  variant="outline-danger" 
+                  className="btn-circle"
+                  onClick={() => removeRow(index)}
+                >
+                  <i className="bi bi-trash"></i>
                 </Button>
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
+              </Col>
+            )}
+          </Row>
+        </div>
       ))}
 
-      <Button variant="primary" onClick={addRow}>
-        Add
-      </Button>
+      <div className="mt-3">
+        <Button variant="outline-success" className="btn-add-row" onClick={addRow}>
+          <i className="bi bi-plus-lg me-2"></i> Add Entry
+        </Button>
+      </div>
     </div>
   );
 }
