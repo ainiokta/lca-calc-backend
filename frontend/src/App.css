@@ -13,10 +13,18 @@
   padding: 3rem;
   border-radius: 32px;
   box-shadow: 0 20px 60px rgba(45, 106, 79, 0.08);
-  max-width: 800px;
+  width: 90vw;            /* Uses 90% of the screen width */
+  max-width: 1200px;      /* Prevents it from getting too huge on ultra-wide monitors */
+  min-width: 350px;       /* Keeps it usable on mobile */
   margin: 0 auto;
 }
 
+@media (max-width: 992px) {
+  .calculator-wrapper {
+    width: 95vw;
+    padding: 1.5rem;
+  }
+}
 .main-title {
   color: #1b4332;
   font-weight: 800;

@@ -54,7 +54,7 @@ export default function CalculatorPage() {
 
   return (
     <div className="calculator-bg">
-      <Container className="py-5">
+      <Container fluid className="d-flex justify-content-center">
         <div className="calculator-wrapper">
           <div className="header-section mb-4 d-flex justify-content-between align-items-center">
             <h1 className="main-title">CO₂ Footprint Calculator</h1>
