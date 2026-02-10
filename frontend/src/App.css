@@ -19,12 +19,6 @@
   margin: 0 auto;
 }
 
-@media (max-width: 992px) {
-  .calculator-wrapper {
-    width: 95vw;
-    padding: 1.5rem;
-  }
-}
 .main-title {
   color: #1b4332;
   font-weight: 800;
