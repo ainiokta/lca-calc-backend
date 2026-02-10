@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Query
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
 
 from utils.calc_electricity import calc_electricity
 from utils.calc_vehicle import calc_vehicle
@@ -21,9 +22,13 @@ def root():
     return {"message": "Carbon Calculator API is running 🚀"}
 
 # Load dataset sekali saat server start
-fe_electricity = pd.read_csv("data/fe_electricity.csv")
-fe_fuel = pd.read_csv("data/fe_bahan_bakar.csv")
-fe_gas = pd.read_csv("data/fe_bahan_gas.csv")
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+
+fe_electricity = pd.read_csv(DATA_DIR / "fe_electricity.csv")
+fe_fuel = pd.read_csv(DATA_DIR / "fe_bahan_bakar.csv")
+fe_gas = pd.read_csv(DATA_DIR / "fe_bahan_gas.csv")
+
 
 
 @app.get("/list-provinsi")
