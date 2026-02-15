@@ -9,20 +9,6 @@ from utils.calc_gas import calc_gas
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# ---------- Routes ----------
-@app.get("/")
-def root():
-    return {"message": "Carbon Calculator API is running"}
-
-# ---------- Lazy data loading ----------
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
@@ -30,14 +16,16 @@ fe_electricity = None
 fe_fuel = None
 fe_gas = None
 
-
+@app.on_event("startup")
 def load_data():
     global fe_electricity, fe_fuel, fe_gas
+    fe_electricity = pd.read_csv(DATA_DIR / "fe_electricity.csv")
+    fe_fuel = pd.read_csv(DATA_DIR / "fe_bahan_bakar.csv")
+    fe_gas = pd.read_csv(DATA_DIR / "fe_bahan_gas.csv")
 
-    if fe_electricity is None:
-        fe_electricity = pd.read_csv(DATA_DIR / "fe_electricity.csv")
-        fe_fuel = pd.read_csv(DATA_DIR / "fe_bahan_bakar.csv")
-        fe_gas = pd.read_csv(DATA_DIR / "fe_bahan_gas.csv")
+@app.get("/")
+def root():
+    return {"status": "ok"}
 
 
 @app.get("/list-provinsi")
