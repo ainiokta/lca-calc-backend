@@ -1,7 +1,6 @@
-from fastapi import FastAPI, Query
-import pandas as pd
 from functools import lru_cache
 from pathlib import Path
+from fastapi import FastAPI, Query
 
 from utils.calc_electricity import calc_electricity
 from utils.calc_vehicle import calc_vehicle
@@ -13,26 +12,28 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
 
-# ---------- Lazy cached loaders ----------
 @lru_cache
 def load_electricity():
+    import pandas as pd
     return pd.read_csv(DATA_DIR / "fe_electricity.csv")
 
 
 @lru_cache
 def load_fuel():
+    import pandas as pd
     return pd.read_csv(DATA_DIR / "fe_bahan_bakar.csv")
 
 
 @lru_cache
 def load_gas():
+    import pandas as pd
     return pd.read_csv(DATA_DIR / "fe_bahan_gas.csv")
 
 
-# ---------- Root ----------
 @app.get("/")
 def root():
     return {"status": "ok"}
+
 
 
 # ---------- List endpoints ----------
