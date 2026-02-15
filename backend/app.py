@@ -17,6 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ---------- Routes ----------
+@app.get("/")
+def root():
+    return {"message": "Carbon Calculator API is running"}
+
 # ---------- Lazy data loading ----------
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -33,12 +38,6 @@ def load_data():
         fe_electricity = pd.read_csv(DATA_DIR / "fe_electricity.csv")
         fe_fuel = pd.read_csv(DATA_DIR / "fe_bahan_bakar.csv")
         fe_gas = pd.read_csv(DATA_DIR / "fe_bahan_gas.csv")
-
-
-# ---------- Routes ----------
-@app.get("/")
-def root():
-    return {"message": "Carbon Calculator API is running"}
 
 
 @app.get("/list-provinsi")
