@@ -11,44 +11,58 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # bisa diganti ke domain frontend nanti
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/")
-def root():
-    return {"message": "Carbon Calculator API is running 🚀"}
-
-# Load dataset sekali saat server start
+# ---------- Lazy data loading ----------
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
-fe_electricity = pd.read_csv(DATA_DIR / "fe_electricity.csv")
-fe_fuel = pd.read_csv(DATA_DIR / "fe_bahan_bakar.csv")
-fe_gas = pd.read_csv(DATA_DIR / "fe_bahan_gas.csv")
+fe_electricity = None
+fe_fuel = None
+fe_gas = None
 
+
+def load_data():
+    global fe_electricity, fe_fuel, fe_gas
+
+    if fe_electricity is None:
+        fe_electricity = pd.read_csv(DATA_DIR / "fe_electricity.csv")
+        fe_fuel = pd.read_csv(DATA_DIR / "fe_bahan_bakar.csv")
+        fe_gas = pd.read_csv(DATA_DIR / "fe_bahan_gas.csv")
+
+
+# ---------- Routes ----------
+@app.get("/")
+def root():
+    return {"message": "Carbon Calculator API is running"}
 
 
 @app.get("/list-provinsi")
 def list_provinsi():
+    load_data()
     return fe_electricity["Provinsi"].unique().tolist()
 
 
 @app.get("/list-grid")
 def list_grid(provinsi: str):
+    load_data()
     rows = fe_electricity[fe_electricity["Provinsi"] == provinsi]
     return rows[["Grid", "Faktor_Emisi_(FE)"]].to_dict(orient="records")
 
 
 @app.get("/list-fuel")
 def list_fuel():
+    load_data()
     return fe_fuel[["Bahan_Bakar_Minyak", "Faktor_Emisi_(FE)"]].to_dict(orient="records")
 
 
 @app.get("/list-gas")
 def list_gas():
+    load_data()
     return fe_gas[["Bahan_Bakar_Gas", "Faktor_Emisi_(FE)"]].to_dict(orient="records")
 
 
@@ -59,6 +73,8 @@ def calc_elec_api(
     kwh: float = Query(...),
     grid: str = Query(None)
 ):
+    load_data()
+
     rows = fe_electricity[fe_electricity["Provinsi"] == provinsi]
 
     if rows.empty:
@@ -90,6 +106,8 @@ def calc_vehicle_api(
     bahan_bakar: str = Query(...),
     jumlah: float = Query(...)
 ):
+    load_data()
+
     rows = fe_fuel[fe_fuel["Bahan_Bakar_Minyak"] == bahan_bakar]
 
     if rows.empty:
@@ -113,6 +131,8 @@ def calc_gas_api(
     jenis_gas: str = Query(...),
     jumlah: float = Query(...)
 ):
+    load_data()
+
     rows = fe_gas[fe_gas["Bahan_Bakar_Gas"] == jenis_gas]
 
     if rows.empty:
