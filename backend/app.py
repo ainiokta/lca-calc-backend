@@ -1,12 +1,21 @@
 from functools import lru_cache
 from pathlib import Path
 from fastapi import FastAPI, Query
-
+from fastapi.middleware.cors import CORSMiddleware
 from utils.calc_electricity import calc_electricity
 from utils.calc_vehicle import calc_vehicle
 from utils.calc_gas import calc_gas
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or replace "*" with your Netlify domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
