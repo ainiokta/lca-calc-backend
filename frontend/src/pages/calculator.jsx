@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState }  from "react";
+// import React, { memo } from "react";
 import { Container, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ElectricityForm from "../components/electricity_form";
 import FuelForm from "../components/fuel_form";
 import GasForm from "../components/gas_form";
 import "../App.css";
+import { memo } from "react";
 
 export default function CalculatorPage() {
   const [openCard, setOpenCard] = useState(null);
@@ -27,7 +29,7 @@ export default function CalculatorPage() {
     });
   };
 
-  const CategoryRow = ({ id, title, icon, data, FormComponent }) => (
+  const CategoryRow = memo(({ id, title, icon, data, FormComponent }) => (
     <Card className={`category-card mb-3 ${openCard === id ? "is-open" : ""}`}>
       <Card.Body onClick={() => toggleCard(id)} className="d-flex align-items-center cursor-pointer">
         <div className={`icon-wrapper me-3 icon-${id}`}>
@@ -50,7 +52,7 @@ export default function CalculatorPage() {
         </div>
       )}
     </Card>
-  );
+  ));
 
   return (
     <div className="calculator-bg">

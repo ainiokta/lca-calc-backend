@@ -106,7 +106,7 @@ export default function GasForm({ data = [], setData }) {
 
             {/* Jumlah (Kg) */}
             <Col md={2}>
-              <FloatingLabel label="Jumlah (Kg)">
+              <FloatingLabel label="Jumlah">
                 <Form.Control
                   type="number"
                   min={0}
